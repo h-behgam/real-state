@@ -8,7 +8,7 @@ interface ser {
   email: string;
   password: string;
 }
-const authOptions: NextAuthOptions = {
+export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_KEY,
   session: { strategy: "jwt" },
   providers: [
