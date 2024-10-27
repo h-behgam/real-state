@@ -24,18 +24,20 @@ const authOptions: NextAuthOptions = {
         },
       },
       async authorize(credentials): Promise<any> {
-        //database conect
+        // check database conect
         try {
           await connectDB();
         } catch (error: any) {
           throw new Error("مشکلی در ارتباط در بخش next auth وجود دارد");
         }
 
+        // check user exist
         const userExist = await User.findOne({ email: credentials?.email });
         if (!userExist) {
           throw new Error("ابتدا حساب کاربری ایجاد کنید");
         }
 
+        // compare input password and user password
         const passwordValid = await verifyPassword(credentials?.password!, userExist.password);
         if (!passwordValid) {
           throw new Error("رمز عبور اشتباه است");
