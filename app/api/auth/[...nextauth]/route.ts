@@ -32,18 +32,18 @@ export const authOptions: NextAuthOptions = {
         }
 
         // check user exist
-        const userExist = await User.findOne({ email: credentials?.email });
-        if (!userExist) {
+        const user = await User.findOne({ email: credentials?.email });
+        if (!user) {
           throw new Error("ابتدا حساب کاربری ایجاد کنید");
         }
 
         // compare input password and user password
-        const passwordValid = await verifyPassword(credentials?.password!, userExist.password);
+        const passwordValid = await verifyPassword(credentials?.password!, user.password);
         if (!passwordValid) {
           throw new Error("رمز عبور اشتباه است");
         }
 
-        return credentials?.email;
+        return user;
       },
     }),
   ],
