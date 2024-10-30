@@ -27,9 +27,8 @@ export default async function Header() {
       </nav>
       <div className="">
         {session ? (
-          <Link href={"/signin"} className="flex text-black items-center gap-x-2 rounded-md p-1 bg-white mt-2">
+          <Link href={"/dashboard"} className="flex text-black items-center gap-x-2 rounded-md p-1 bg-white mt-2">
             <FaUserAlt />
-            <span>خروج</span>
           </Link>
         ) : (
           <Link href={"/signin"} className="flex text-black items-center gap-x-2 rounded-md p-1 bg-white mt-2">
