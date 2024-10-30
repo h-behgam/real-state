@@ -1,5 +1,6 @@
 interface InputProps {
   type: string;
+  id?: string;
   name: string | number;
   defaultValue?: string | number;
   autoComplete?: string;
@@ -16,6 +17,7 @@ interface InputProps {
 export default function CustomInput({
   type,
   name,
+  id,
   defaultValue,
   changeHandler,
   classname,
@@ -37,8 +39,8 @@ export default function CustomInput({
       <input
         multiple={multiple}
         type={type}
-        name={name as string}
-        id={name as string}
+        name={name.toString()}
+        id={id || name.toString()}
         placeholder={placeholder}
         onChange={changeHandler}
         autoComplete={autoComplete}
