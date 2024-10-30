@@ -32,8 +32,8 @@ const CustomTextArea: React.FC<TextAreaProps> = ({
         </label>
       )}
       <textarea
-        name={name}
-        id={name}
+        name={name.toString()}
+        id={name.toString()}
         placeholder={placeholder}
         onChange={changeHandler}
         rows={rows ? rows : 4} // Set the number of rows for the text area
