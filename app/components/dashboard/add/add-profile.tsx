@@ -1,20 +1,52 @@
 "use client";
 import React, { useState } from "react";
+
+import PersianDatepicker from "./persian-datepicker";
+
 import CustomInput from "../../global/custom-input";
 import CustomTextArea from "../../global/custom-textarea";
 import SubmitFormButton from "../../global/submit-form-button";
 import TextList from "../../global/text-list";
+import { createProfile } from "@/app/actions/profile-action";
+import connectDB from "@/app/utils/conectDB";
+import { useSession } from "next-auth/react";
 
+interface IProfile {
+    title: string;
+    description: string;
+    location: string;
+    phone: string;
+    realState: string;
+    price: number;
+    constructionDate: Date;
+    category: "villa" | "apartment" | "store" | "office";
+    amenities?: string[];
+    rules?: string[];
+    // userId?: string;
+    // published?: boolean;
+  }
 export default function AddProfile() {
   const [textLists, setTextLists] = useState<string[]>([]);
   const [rouls, setRouls] = useState<string[]>([]);
+  const [createdAt, setCreatedAt] = useState<Date>(new Date());
+//   const session = useSession()
+  
+  const formHandler = async (formData: FormData) => {
+    console.log(111111);
+    
+    // append textlists and rouls
+    formData.append("amenities", textLists as any);
+    formData.append("rules", rouls as any);
+    formData.append("constructionDate", createdAt as any);
+    
+    const res = await createProfile(formData)
+    console.log( res);
+    
 
-  const formHandler = (formData: FormData) => {
-    formData.append("textList", textLists as any);
-    formData.append("roul", rouls as any);
-    const { title, description, location, phone, price, realState, category, textList, roul } =
-      Object.fromEntries(formData);
-    console.log("formData", title, description, location, phone, price, realState, category, textList, roul);
+    // destructure data from formdata
+    // const { title, description, location, phone, price, realState, category, textList, roul, createdAt } =
+    //   Object.fromEntries(formData);
+    // console.log("formData", title, description, location, phone, price, realState, category, textList, roul, createdAt);
   };
   return (
     <>
@@ -82,7 +114,7 @@ export default function AddProfile() {
           />
         </div>
 
-        <div className="mb-4">
+        <div className="mb-6">
           <h3>دسته بندی</h3>
           <div className="flex gap-x-10">
             <div>
@@ -136,7 +168,7 @@ export default function AddProfile() {
           </div>
         </div>
 
-        <div className="mb-4">
+        <div className="mb-6">
           <TextList
             TextLists={textLists}
             setTextLists={setTextLists}
@@ -145,7 +177,7 @@ export default function AddProfile() {
           />
         </div>
 
-        <div className="mb-4">
+        <div className="mb-6">
           <TextList
             TextLists={rouls}
             setTextLists={setRouls}
@@ -154,7 +186,15 @@ export default function AddProfile() {
           />
         </div>
 
-        <SubmitFormButton classname="text-black">ثبت</SubmitFormButton>
+        <div className="mb-6">
+          <PersianDatepicker createdAt={createdAt} setCreatedAt={setCreatedAt} />
+        </div>
+
+        <div className="mt-10">
+          <SubmitFormButton classname="text-black border-blue-800 border hover:bg-blue-800 hover:text-white hover:border-blue-300">
+            ثبت
+          </SubmitFormButton>
+        </div>
       </form>
     </>
   );
