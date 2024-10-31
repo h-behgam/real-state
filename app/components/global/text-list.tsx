@@ -35,7 +35,7 @@ export default function TextList(props: textListProps) {
 
   return (
     <div>
-      <p className="mb-2">{props.title}</p>
+      <p className="mb-1">{props.title}</p>
       {props.TextLists?.map((item, index) => {
         return (
           <div key={index} className="mb-4 flex gap-x-3">
