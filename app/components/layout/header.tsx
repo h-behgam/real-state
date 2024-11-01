@@ -10,15 +10,15 @@ export default async function Header() {
   const session = await getServerSession(authOptions);
   // if (!session) redirect('/signin')
   return (
-    <header className="bg-blue-950 flex justify-between px-5">
+    <header className="bg-blue-950 flex justify-between px-5 items-center">
       <nav>
-        <ul className="p-3 flex gap-x-10">
-          <li>
+        <ul className="flex gap-x-10 p-1">
+          <li className="p-2">
             <Link href={"/"} className="text-white">
               خانه
             </Link>
           </li>
-          <li>
+          <li className="p-2">
             <Link href={"/buy-residential"} className="text-white">
               آگهی ها
             </Link>
@@ -27,11 +27,11 @@ export default async function Header() {
       </nav>
       <div className="">
         {session ? (
-          <Link href={"/dashboard"} className="flex text-black items-center gap-x-2 rounded-md p-1 bg-white mt-2">
+          <Link href={"/dashboard"} className="flex text-black items-center gap-x-2 rounded-md p-1 bg-white">
             <FaUserAlt />
           </Link>
         ) : (
-          <Link href={"/signin"} className="flex text-black items-center gap-x-2 rounded-md p-1 bg-white mt-2">
+          <Link href={"/signin"} className="flex text-black items-center gap-x-2 rounded-md p-1 bg-white">
             <FiLogIn />
             <span>ورود</span>
           </Link>
