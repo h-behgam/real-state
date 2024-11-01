@@ -38,7 +38,6 @@ export async function createProfile(formDate: FormData) {
     category,
     amenities,
     rules,
-    userId,
     published,
   } = Object.fromEntries(formDate) as unknown as IProfile;
 
