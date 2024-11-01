@@ -7,49 +7,44 @@ import CustomInput from "../../global/custom-input";
 import CustomTextArea from "../../global/custom-textarea";
 import SubmitFormButton from "../../global/submit-form-button";
 import TextList from "../../global/text-list";
+
 import { createProfile } from "@/app/actions/profile-action";
-import connectDB from "@/app/utils/conectDB";
-import { useSession } from "next-auth/react";
+import { toast, ToastContainer } from "react-toastify";
 
 interface IProfile {
-    title: string;
-    description: string;
-    location: string;
-    phone: string;
-    realState: string;
-    price: number;
-    constructionDate: Date;
-    category: "villa" | "apartment" | "store" | "office";
-    amenities?: string[];
-    rules?: string[];
-    // userId?: string;
-    // published?: boolean;
-  }
+  title: string;
+  description: string;
+  location: string;
+  phone: string;
+  realState: string;
+  price: number;
+  constructionDate: Date;
+  category: "villa" | "apartment" | "store" | "office";
+  amenities?: string[];
+  rules?: string[];
+}
 export default function AddProfile() {
   const [textLists, setTextLists] = useState<string[]>([]);
   const [rouls, setRouls] = useState<string[]>([]);
   const [createdAt, setCreatedAt] = useState<Date>(new Date());
-//   const session = useSession()
-  
+  //   const session = useSession()
+
   const formHandler = async (formData: FormData) => {
-    console.log(111111);
-    
     // append textlists and rouls
     formData.append("amenities", textLists as any);
     formData.append("rules", rouls as any);
     formData.append("constructionDate", createdAt as any);
-    
-    const res = await createProfile(formData)
-    console.log( res);
-    
 
-    // destructure data from formdata
-    // const { title, description, location, phone, price, realState, category, textList, roul, createdAt } =
-    //   Object.fromEntries(formData);
-    // console.log("formData", title, description, location, phone, price, realState, category, textList, roul, createdAt);
+    const res = await createProfile(formData);
+    if (res.error) {
+      toast.error(res.error);
+    } else {
+      toast.success(res.message);
+    }
   };
   return (
     <>
+      <ToastContainer />
       <div className="bg-cyan-50 p-3 rounded-md mb-5">
         <h3 className="text-blue-500 font-normal">ثبت آگهی</h3>
       </div>
