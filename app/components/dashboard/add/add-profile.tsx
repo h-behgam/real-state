@@ -8,10 +8,11 @@ import CustomTextArea from "../../global/custom-textarea";
 import SubmitFormButton from "../../global/submit-form-button";
 import TextList from "../../global/text-list";
 
-import { createProfile } from "@/app/actions/profile-action";
+import { createProfile, editProfile } from "@/app/actions/profile-action";
 import { toast, ToastContainer } from "react-toastify";
 
 interface IProfile {
+  _id?: number;
   title: string;
   description: string;
   location: string;
@@ -23,10 +24,12 @@ interface IProfile {
   amenities?: string[];
   rules?: string[];
 }
-export default function AddProfile() {
-  const [textLists, setTextLists] = useState<string[]>([]);
-  const [rouls, setRouls] = useState<string[]>([]);
-  const [createdAt, setCreatedAt] = useState<Date>(new Date());
+export default function AddProfile({ profile }: { profile: IProfile }) {
+  // console.log(profile);
+
+  const [textLists, setTextLists] = useState<string[]>(profile && profile.amenities ? profile.amenities : []);
+  const [rouls, setRouls] = useState<string[]>(profile && profile.rules ? profile.rules : []);
+  const [createdAt, setCreatedAt] = useState<Date>(profile ? profile.constructionDate : new Date());
   //   const session = useSession()
 
   const formHandler = async (formData: FormData) => {
@@ -35,7 +38,22 @@ export default function AddProfile() {
     formData.append("rules", rouls as any);
     formData.append("constructionDate", createdAt as any);
 
-    const res = await createProfile(formData);
+    // add id to formdata in edit
+    if(profile) formData.append("_id", profile._id as any);
+
+    // decler type of res
+    let res:
+      | { error: string; status: number; message?: undefined }
+      | { message: string; status: number; error?: undefined };
+
+    //check for edit or create function is run
+    if (profile) {
+      res = await editProfile(formData);
+    } else {
+      res = await createProfile(formData);
+    }
+
+    // show response
     if (res.error) {
       toast.error(res.error);
     } else {
@@ -46,7 +64,7 @@ export default function AddProfile() {
     <>
       <ToastContainer />
       <div className="bg-cyan-50 p-3 rounded-md mb-5">
-        <h3 className="text-blue-500 font-normal">ثبت آگهی</h3>
+        <h3 className="text-blue-500 font-normal">{profile ? "ویرایش" : "ثبت"} آگهی</h3>
       </div>
       <form action={formHandler} className=" w-1/2">
         <div className="mb-4">
@@ -56,6 +74,7 @@ export default function AddProfile() {
             labalName={"title"}
             labelTitle="عنوان آگهی"
             placeholder="عنوان آگهی"
+            defaultValue={profile && profile.title}
             classname="block w-full rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:outline-none focus:ring-blue-100 sm:text-sm sm:leading-6"
           />
         </div>
@@ -65,6 +84,7 @@ export default function AddProfile() {
             labalName={"description"}
             labelTitle="توضیحات آگهی"
             placeholder="توضیحات آگهی"
+            defaultValue={profile && profile.description}
             classname="block w-full rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:outline-none focus:ring-blue-100 sm:text-sm sm:leading-6"
           />
         </div>
@@ -75,6 +95,7 @@ export default function AddProfile() {
             labalName={"location"}
             labelTitle="آدرس"
             placeholder="آدرس"
+            defaultValue={profile && profile.location}
             classname="block w-full rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:outline-none focus:ring-blue-100 sm:text-sm sm:leading-6"
           />
         </div>
@@ -85,6 +106,7 @@ export default function AddProfile() {
             labalName={"phone"}
             labelTitle="شماره تماس"
             placeholder="شماره تماس"
+            defaultValue={profile && profile.phone}
             classname="block w-full rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:outline-none focus:ring-blue-100 sm:text-sm sm:leading-6"
           />
         </div>
@@ -95,6 +117,7 @@ export default function AddProfile() {
             labalName={"price"}
             labelTitle="قیمت"
             placeholder="قیمت"
+            defaultValue={profile && profile.price}
             classname="block w-full rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:outline-none focus:ring-blue-100 sm:text-sm sm:leading-6"
           />
         </div>
@@ -105,6 +128,7 @@ export default function AddProfile() {
             labalName={"realState"}
             labelTitle="بنگاه"
             placeholder="بنگاه"
+            defaultValue={profile && profile.realState}
             classname="block w-full rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:outline-none focus:ring-blue-100 sm:text-sm sm:leading-6"
           />
         </div>
@@ -119,6 +143,7 @@ export default function AddProfile() {
                 id="villa"
                 labalName={"villa"}
                 value={"villa"}
+                checked = {profile?.category === "villa"}
                 labelTitle="ویلا"
                 placeholder="ویلا"
                 classname="block rounded-md border-0 p-2 text-gray-900 shadow-sm placeholder:text-gray-400 focus:ring-2 focus:outline-none focus:ring-blue-100 sm:text-sm sm:leading-6"
@@ -131,6 +156,7 @@ export default function AddProfile() {
                 id="apartment"
                 labalName={"apartment"}
                 value={"apartment"}
+                checked = {profile?.category === "apartment"}
                 labelTitle="آپارتمان"
                 placeholder="آپارتمان"
                 classname="block rounded-md border-0 p-2 text-gray-900 shadow-sm placeholder:text-gray-400 focus:ring-2 focus:outline-none focus:ring-blue-100 sm:text-sm sm:leading-6"
@@ -143,6 +169,7 @@ export default function AddProfile() {
                 id="store"
                 labalName={"store"}
                 value={"store"}
+                checked = {profile?.category === "store"}
                 labelTitle="مغازه"
                 placeholder="مغازه"
                 classname="block rounded-md border-0 p-2 text-gray-900 shadow-sm placeholder:text-gray-400 focus:ring-2 focus:outline-none focus:ring-blue-100 sm:text-sm sm:leading-6"
@@ -155,6 +182,7 @@ export default function AddProfile() {
                 id="office"
                 labalName={"office"}
                 value={"office"}
+                checked = {profile?.category === "office"}
                 labelTitle="دفتر"
                 placeholder="دفتر"
                 classname="block rounded-md border-0 p-2 text-gray-900 shadow-sm placeholder:text-gray-400 focus:ring-2 focus:outline-none focus:ring-blue-100 sm:text-sm sm:leading-6"
@@ -187,7 +215,7 @@ export default function AddProfile() {
 
         <div className="mt-10">
           <SubmitFormButton classname="text-black border-blue-800 border hover:bg-blue-800 hover:text-white hover:border-blue-300">
-            ثبت
+            {profile ? "ویرایش" : "ثبت"}
           </SubmitFormButton>
         </div>
       </form>
