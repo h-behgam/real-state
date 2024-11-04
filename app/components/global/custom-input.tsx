@@ -12,6 +12,7 @@ interface InputProps {
   labelTitle?: string;
   multiple?: boolean;
   value?: any;
+  checked?: boolean;
 }
 
 export default function CustomInput({
@@ -28,6 +29,7 @@ export default function CustomInput({
   placeholder,
   multiple,
   value,
+  checked,
 }: InputProps) {
   return (
     <>
@@ -39,6 +41,7 @@ export default function CustomInput({
       <input
         multiple={multiple}
         type={type}
+        defaultChecked={checked}
         name={name.toString()}
         id={id || name.toString()}
         placeholder={placeholder}
