@@ -5,7 +5,7 @@ import connectDB from "@/app/utils/conectDB";
 import { getServerSession } from "next-auth";
 import React from "react";
 
-interface IProfile {
+export interface IProfile {
   _id: number;
   title: string;
   description: string;
