@@ -8,11 +8,10 @@ interface InfoButtonProps {
   disabled: boolean;
   classname?: string;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
-  shadow?: boolean;
   noCss?: boolean;
 }
 
-export default function ClientSideButton({ children, disabled, classname, onClick, shadow }: InfoButtonProps) {
+export default function ClientSideButton({ children, disabled, classname, onClick }: InfoButtonProps) {
   return (
     <button
       onClick={onClick}
