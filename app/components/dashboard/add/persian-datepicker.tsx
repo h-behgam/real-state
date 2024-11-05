@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction } from "react";
-import DatePicker from "react-multi-date-picker";
+import DatePicker, { DateObject } from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 
@@ -10,8 +10,8 @@ interface datePeckerProps {
 export default function PersianDatepicker(props: datePeckerProps) {
   const { createdAt, setCreatedAt } = props;
 
-  const changeDateHandler = (e: string) => {
-    const date = new Date(e);
+  const changeDateHandler = (e: DateObject) => {
+    const date = new Date(e as unknown as string);
     setCreatedAt(date);
   };
 
