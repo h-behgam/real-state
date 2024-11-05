@@ -24,7 +24,7 @@ interface IProfile {
   amenities?: string[];
   rules?: string[];
 }
-export default function AddProfile({ profile }: { profile: IProfile }) {
+export default function AddProfile({ profile }: { profile?: IProfile }) {
   // console.log(profile);
 
   const [textLists, setTextLists] = useState<string[]>(profile && profile.amenities ? profile.amenities : []);
