@@ -2,12 +2,13 @@
 
 import { MdOutlineLibraryAdd } from "react-icons/md";
 import { AiOutlineDelete } from "react-icons/ai";
+import { Dispatch, SetStateAction } from "react";
 
 interface textListProps {
   title: string;
   className: string;
   TextLists: string[];
-  setTextLists: any;
+  setTextLists: Dispatch<SetStateAction<string[]>>;
 }
 export default function TextList(props: textListProps) {
   // add new input field
