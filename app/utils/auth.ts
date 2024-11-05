@@ -37,11 +37,12 @@ export const authOptions: NextAuthOptions = {
           type: "password",
         },
       },
-      async authorize(credentials): Promise<any> {
+      async authorize(credentials): Promise<typeof user | null> {
         // check database conect
         try {
           await connectDB();
-        } catch (error: any) {
+        } catch (error) {
+          console.log("connectDB error is :", error);
           throw new Error("مشکلی در ارتباط در بخش next auth وجود دارد");
         }
 
@@ -52,7 +53,8 @@ export const authOptions: NextAuthOptions = {
         }
 
         // compare input password and user password
-        const passwordValid = await verifyPassword(credentials?.password!, user.password);
+        const credentialsPass = credentials ? credentials.password : "";
+        const passwordValid = await verifyPassword(credentialsPass, user.password);
         if (!passwordValid) {
           throw new Error("رمز عبور اشتباه است");
         }
