@@ -4,7 +4,6 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 import { FiLogIn } from "react-icons/fi";
 import { FaUserAlt } from "react-icons/fa";
-import { redirect } from "next/navigation";
 
 export default async function Header() {
   const session = await getServerSession(authOptions);
