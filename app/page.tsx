@@ -14,10 +14,7 @@ export default function Home() {
       </div>
       <HomeServices />
       <div className="flex justify-center py-10 gap-x-7 flex-wrap">
-        <HomeCategories name={"apartment"} title={categories.apartment} />
-        <HomeCategories name={"villa"} title={categories.villa} />
-        <HomeCategories name={"store"} title={categories.store} />
-        <HomeCategories name={"office"} title={categories.office} />
+        <HomeCategories />
       </div>
       <HomeCities />
     </div>
