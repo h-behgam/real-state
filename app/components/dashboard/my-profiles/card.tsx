@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React from "react";
 
 import { icons } from "@/constants/icons";
 import { HiOutlineLocationMarker } from "react-icons/hi";
