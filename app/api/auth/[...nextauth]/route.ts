@@ -1,13 +1,9 @@
-import User, { UserType } from "@/app/models/users";
+import User from "@/app/models/users";
 import { verifyPassword } from "@/app/utils/auth";
 import connectDB from "@/app/utils/conectDB";
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
-interface ser {
-  email: string;
-  password: string;
-}
 export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_KEY,
   session: { strategy: "jwt" },
@@ -23,11 +19,13 @@ export const authOptions: NextAuthOptions = {
           type: "password",
         },
       },
-      async authorize(credentials): Promise<any> {
+
+      async authorize(credentials): Promise<typeof user | null> {
         // check database conect
         try {
           await connectDB();
-        } catch (error: any) {
+        } catch (error) {
+          console.log('connectDB error :', error);
           throw new Error("مشکلی در ارتباط در بخش next auth وجود دارد");
         }
 
@@ -38,7 +36,8 @@ export const authOptions: NextAuthOptions = {
         }
 
         // compare input password and user password
-        const passwordValid = await verifyPassword(credentials?.password!, user.password);
+        const credentialsPass = credentials ? credentials.password : "";
+        const passwordValid = await verifyPassword(credentialsPass, user.password);
         if (!passwordValid) {
           throw new Error("رمز عبور اشتباه است");
         }
