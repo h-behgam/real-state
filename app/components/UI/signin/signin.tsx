@@ -10,7 +10,6 @@ import "react-toastify/ReactToastify.min.css";
 import CustomInput from "../../global/custom-input";
 import SubmitFormButton from "../../global/submit-form-button";
 import { signIn } from "next-auth/react";
-import Credentials from "next-auth/providers/credentials";
 
 export default function Signin() {
   const router = useRouter();
