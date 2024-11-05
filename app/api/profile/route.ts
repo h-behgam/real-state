@@ -1,6 +1,5 @@
 import Profile from "@/app/models/profile";
 import connectDB from "@/app/utils/conectDB";
-import { error } from "console";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
