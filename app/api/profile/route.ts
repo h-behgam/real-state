@@ -3,10 +3,10 @@ import connectDB from "@/app/utils/conectDB";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
+  //get categort from request
+  const category = req.nextUrl.searchParams.get("category")
+  
   try {
-    //get categort from request
-    const category = req.nextUrl.searchParams.get("category")
-    
     // conect to DB
     await connectDB();
 
