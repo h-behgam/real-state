@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from '@/app/utils/auth'
 
 import { FiLogIn } from "react-icons/fi";
 import { FaUserAlt } from "react-icons/fa";

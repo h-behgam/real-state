@@ -1,6 +1,6 @@
 import { getServerSession } from 'next-auth'
-import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 import { redirect } from 'next/navigation'
+import { authOptions } from '@/app/utils/auth'
 
 import Signin from '../../components/UI/signin/signin'
 
