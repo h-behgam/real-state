@@ -4,8 +4,8 @@ import { Document, Schema, model, models } from "mongoose";
 
 // تعریف اینترفیس برای نوع داده‌های یوزر
 interface IUser extends Document {
-  email: String;
-  password: String;
+  email: string;
+  password: string;
   createdAt: Date;
 }
 export interface UserType {
