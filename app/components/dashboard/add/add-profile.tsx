@@ -12,7 +12,7 @@ import { createProfile, editProfile } from "@/app/actions/profile-action";
 import { toast, ToastContainer } from "react-toastify";
 
 interface IProfile {
-  _id?: number;
+  _id?: string;
   title: string;
   description: string;
   location: string;
@@ -34,12 +34,12 @@ export default function AddProfile({ profile }: { profile: IProfile }) {
 
   const formHandler = async (formData: FormData) => {
     // append textlists and rouls
-    formData.append("amenities", textLists as any);
-    formData.append("rules", rouls as any);
-    formData.append("constructionDate", createdAt as any);
+    formData.append("amenities", JSON.stringify(textLists));
+    formData.append("rules", JSON.stringify(rouls));
+    formData.append("constructionDate", createdAt.toDateString());
 
     // add id to formdata in edit
-    if(profile) formData.append("_id", profile._id as any);
+    if(profile && profile._id) formData.append("_id", profile._id);
 
     // decler type of res
     let res:
