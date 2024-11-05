@@ -15,7 +15,7 @@ export interface ICard {
   price: number;
 }
 export default function Card({ card }: { card: ICard }) {
-  const { title, category, location, price } = card;
+  const { _id, title, category, location, price } = card;
 
   return (
     <div className="flex flex-col border border-blue-500 p-2 rounded-lg w-52 gap-y-2">
@@ -26,7 +26,7 @@ export default function Card({ card }: { card: ICard }) {
         {location}
       </p>
       <span>{sp(price)} تومان</span>
-      <Link href={"/"} className="flex justify-between text-blue-800">
+      <Link href={`/buy-residential/${_id}`} className="flex justify-between text-blue-800">
         مشاهده آگهی
         <BiLeftArrowAlt />
       </Link>
