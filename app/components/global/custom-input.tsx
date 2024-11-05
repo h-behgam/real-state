@@ -11,7 +11,7 @@ interface InputProps {
   labelClassName?: string;
   labelTitle?: string;
   multiple?: boolean;
-  value?: any;
+  value?: string;
   checked?: boolean;
 }
 
