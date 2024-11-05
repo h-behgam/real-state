@@ -8,8 +8,8 @@ export default function SubmitFormButton({
   onClick,
 }: {
   // classname?: React.CSSProperties;
-  classname?: any;
-  onClick?: any;
+  classname?: string;
+  onClick?: () => void;
   children: React.ReactNode;
 }) {
   const { pending } = useFormStatus();
