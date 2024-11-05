@@ -1,6 +1,5 @@
 "use server";
 
-import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../utils/auth";
 
@@ -42,6 +41,10 @@ export async function createProfile(formDate: FormData) {
     published,
   } = Object.fromEntries(formDate) as unknown as IProfile;
 
+  //convert to array
+  const amenitiesParsed = JSON.parse(amenities as unknown as string);
+  const rulesParsed = JSON.parse(rules as unknown as string);
+
   // check conected to DB
   try {
     await connectDB();
@@ -56,8 +59,8 @@ export async function createProfile(formDate: FormData) {
       !price ||
       !constructionDate ||
       !category ||
-      !amenities ||
-      !rules
+      !amenitiesParsed ||
+      !rulesParsed
     ) {
       return { error: "لطفا فیلد ها را به درستی پر کنید", status: 401 };
     }
@@ -87,14 +90,18 @@ export async function createProfile(formDate: FormData) {
       price: parseInt(price),
       constructionDate,
       category,
-      amenities,
-      rules,
+      amenities: amenitiesParsed,
+      rules: rulesParsed,
       userId: new Types.ObjectId(user._id),
       published,
     });
+    if (!newProfile) {
+      return { error: "پروفایل ثبت نشد!!!", status: 401 };
+    }
 
     return { message: "پروفایل با موفقیت ثبت شد", status: 200 };
   } catch (error) {
+    console.log("profile action error 1", error);
     throw new Error("مشکلی در اتصال به دیتابیس وجود دارد");
   }
 }
@@ -116,6 +123,10 @@ export async function editProfile(formDate: FormData) {
     published,
   } = Object.fromEntries(formDate) as unknown as IProfile;
 
+  //convert to array
+  const amenitiesParsed = JSON.parse(amenities as unknown as string);
+  const rulesParsed = JSON.parse(rules as unknown as string);
+
   // check conected to DB
   try {
     await connectDB();
@@ -130,8 +141,8 @@ export async function editProfile(formDate: FormData) {
       !price ||
       !constructionDate ||
       !category ||
-      !amenities ||
-      !rules
+      !amenitiesParsed ||
+      !rulesParsed
     ) {
       return { error: "لطفا فیلد ها را به درستی پر کنید", status: 401 };
     }
@@ -162,8 +173,8 @@ export async function editProfile(formDate: FormData) {
       price: parseInt(price),
       constructionDate,
       category,
-      amenities,
-      rules,
+      amenities: amenitiesParsed,
+      rules: rulesParsed,
       userId: new Types.ObjectId(user._id),
       published,
     });
@@ -171,6 +182,7 @@ export async function editProfile(formDate: FormData) {
 
     return { message: "پروفایل با موفقیت ویرایش شد", status: 200 };
   } catch (error) {
+    console.log("profile action error 2", error);
     throw new Error("مشکلی در اتصال به دیتابیس وجود دارد");
   }
 }
@@ -197,9 +209,13 @@ export async function deleteProfile(_id: number) {
     }
 
     const deleteProfile = await Profile.deleteOne({ _id });
+    if (!deleteProfile) {
+      return { error: "پروفایل حذف نشد", status: 401 };
+    }
 
     return { message: "پروفایل با موفقیت حذف شد", status: 200 };
   } catch (error) {
+    console.log("profile action error 3", error);
     throw new Error("مشکلی در اتصال به دیتابیس وجود دارد");
   }
 }
