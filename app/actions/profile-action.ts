@@ -178,7 +178,6 @@ export async function editProfile(formDate: FormData) {
       userId: new Types.ObjectId(user._id),
       published,
     });
-    console.log(updateProfile);
 
     return { message: "پروفایل با موفقیت ویرایش شد", status: 200 };
   } catch (error) {
