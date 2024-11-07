@@ -6,6 +6,7 @@ import { Document, Schema, model, models } from "mongoose";
 interface IUser extends Document {
   email: string;
   password: string;
+  role: string;
   createdAt: Date;
 }
 export interface UserType {
@@ -23,6 +24,10 @@ const userSchema = new Schema<IUser>({
   password: {
     type: String,
     required: true,
+  },
+  role: {
+    type: String,
+    default: "USER",
   },
   createdAt: {
     type: Date,
