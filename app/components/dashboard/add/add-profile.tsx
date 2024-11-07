@@ -25,21 +25,18 @@ interface IProfile {
   rules?: string[];
 }
 export default function AddProfile({ profile }: { profile?: IProfile }) {
-  // console.log(profile);
-
   const [textLists, setTextLists] = useState<string[]>(profile && profile.amenities ? profile.amenities : []);
   const [rouls, setRouls] = useState<string[]>(profile && profile.rules ? profile.rules : []);
   const [createdAt, setCreatedAt] = useState<Date>(profile ? profile.constructionDate : new Date());
-  //   const session = useSession()
 
   const formHandler = async (formData: FormData) => {
     // append textlists and rouls
     formData.append("amenities", JSON.stringify(textLists));
     formData.append("rules", JSON.stringify(rouls));
-    formData.append("constructionDate", createdAt.toDateString());
+    formData.append("constructionDate", new Date(createdAt).toDateString());
 
     // add id to formdata in edit
-    if(profile && profile._id) formData.append("_id", profile._id);
+    if (profile && profile._id) formData.append("_id", profile._id);
 
     // decler type of res
     let res:
@@ -143,7 +140,7 @@ export default function AddProfile({ profile }: { profile?: IProfile }) {
                 id="villa"
                 labalName={"villa"}
                 value={"villa"}
-                checked = {profile?.category === "villa"}
+                checked={profile?.category === "villa"}
                 labelTitle="ویلا"
                 placeholder="ویلا"
                 classname="block rounded-md border-0 p-2 text-gray-900 shadow-sm placeholder:text-gray-400 focus:ring-2 focus:outline-none focus:ring-blue-100 sm:text-sm sm:leading-6"
@@ -156,7 +153,7 @@ export default function AddProfile({ profile }: { profile?: IProfile }) {
                 id="apartment"
                 labalName={"apartment"}
                 value={"apartment"}
-                checked = {profile?.category === "apartment"}
+                checked={profile?.category === "apartment"}
                 labelTitle="آپارتمان"
                 placeholder="آپارتمان"
                 classname="block rounded-md border-0 p-2 text-gray-900 shadow-sm placeholder:text-gray-400 focus:ring-2 focus:outline-none focus:ring-blue-100 sm:text-sm sm:leading-6"
@@ -169,7 +166,7 @@ export default function AddProfile({ profile }: { profile?: IProfile }) {
                 id="store"
                 labalName={"store"}
                 value={"store"}
-                checked = {profile?.category === "store"}
+                checked={profile?.category === "store"}
                 labelTitle="مغازه"
                 placeholder="مغازه"
                 classname="block rounded-md border-0 p-2 text-gray-900 shadow-sm placeholder:text-gray-400 focus:ring-2 focus:outline-none focus:ring-blue-100 sm:text-sm sm:leading-6"
@@ -182,7 +179,7 @@ export default function AddProfile({ profile }: { profile?: IProfile }) {
                 id="office"
                 labalName={"office"}
                 value={"office"}
-                checked = {profile?.category === "office"}
+                checked={profile?.category === "office"}
                 labelTitle="دفتر"
                 placeholder="دفتر"
                 classname="block rounded-md border-0 p-2 text-gray-900 shadow-sm placeholder:text-gray-400 focus:ring-2 focus:outline-none focus:ring-blue-100 sm:text-sm sm:leading-6"
