@@ -6,7 +6,7 @@ import { getServerSession } from "next-auth";
 import React from "react";
 
 export interface IProfile {
-  _id: number;
+  _id?: number;
   title: string;
   description: string;
   location: string;
