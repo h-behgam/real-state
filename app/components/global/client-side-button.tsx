@@ -11,7 +11,7 @@ interface InfoButtonProps {
   noCss?: boolean;
 }
 
-export default function ClientSideButton({ children, disabled, classname, onClick }: InfoButtonProps) {
+export default function CustomClientSideButton({ children, disabled, classname, onClick }: InfoButtonProps) {
   return (
     <button
       onClick={onClick}
