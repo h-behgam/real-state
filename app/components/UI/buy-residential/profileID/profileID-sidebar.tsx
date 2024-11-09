@@ -1,7 +1,7 @@
 import { e2p, sp } from "@/app/utils/replace-number";
 
-import { categories } from "@/constants/categories";
-import { icons } from "@/constants/icons";
+import { categories } from "@/app/constants/categories";
+import { icons } from "@/app/constants/icons";
 
 import { AiOutlinePhone } from "react-icons/ai";
 import { SiHomebridge } from "react-icons/si";
