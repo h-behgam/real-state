@@ -1,4 +1,4 @@
-import { cities } from "@/constants/categories";
+import { cities } from "@/app/constants/categories";
 import { FaCity } from "react-icons/fa";
 
 export default function HomeCities() {
