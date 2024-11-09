@@ -1,4 +1,4 @@
-import { categories } from "@/constants/categories";
+import { categories } from "@/app/constants/categories";
 import Link from "next/link";
 import { HiFilter } from "react-icons/hi";
 
