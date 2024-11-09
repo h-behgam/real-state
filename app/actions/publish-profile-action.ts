@@ -1,26 +1,24 @@
 "use server";
 
-import { getServerSession } from "next-auth";
 import connectDB from "../utils/conectDB";
-import { authOptions } from "../utils/auth";
 import { checkRole } from "../utils/session";
 import Profile from "../models/profile";
 
-interface IProfile {
-  _id?: string;
-  title: string;
-  description: string;
-  location: string;
-  phone: string;
-  realState: string;
-  price: string;
-  constructionDate: Date;
-  category: "villa" | "apartment" | "store" | "office";
-  amenities?: string[];
-  rules?: string[];
-  userId?: string;
-  published?: boolean;
-}
+// interface IProfile {
+//   _id?: string;
+//   title: string;
+//   description: string;
+//   location: string;
+//   phone: string;
+//   realState: string;
+//   price: string;
+//   constructionDate: Date;
+//   category: "villa" | "apartment" | "store" | "office";
+//   amenities?: string[];
+//   rules?: string[];
+//   userId?: string;
+//   published?: boolean;
+// }
 
 export async function publishProfile(id: string) {
   console.log("id", id);
