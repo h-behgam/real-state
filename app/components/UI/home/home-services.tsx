@@ -1,4 +1,4 @@
-import { services } from "@/constants/categories";
+import { services } from "@/app/constants/categories";
 
 import { FiCircle } from "react-icons/fi";
 
