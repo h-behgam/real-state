@@ -179,6 +179,10 @@ export async function editProfile(formDate: FormData) {
       published,
     });
 
+    if (!updateProfile) {
+      return { error: "پروفایل ویرایش نشد!!!", status: 401 };
+    }
+
     return { message: "پروفایل با موفقیت ویرایش شد", status: 200 };
   } catch (error) {
     console.log("profile action error 2", error);
