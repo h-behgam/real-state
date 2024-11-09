@@ -1,6 +1,6 @@
 import Profile from "@/app/models/profile";
 import connectDB from "@/app/utils/conectDB";
-import { checkRole, isSession } from "@/app/utils/session";
+import { checkRole } from "@/app/utils/session";
 import { redirect } from "next/navigation";
 import { IProfile } from "../my-profiles/page";
 import ProfilePendingList from "@/app/components/dashboard/pending/profile-pending-list";
