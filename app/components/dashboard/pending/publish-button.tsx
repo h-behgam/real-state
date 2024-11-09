@@ -1,6 +1,9 @@
 "use client";
-import { publishProfile } from "@/app/actions/publish-profile-action";
+import { revalidatePath } from "next/cache";
 import { useRouter } from "next/navigation";
+
+import { publishProfile } from "@/app/actions/publish-profile-action";
+
 import { toast } from "react-toastify";
 
 export default function PublishButton({ id }: { id: undefined | string }) {
@@ -13,6 +16,7 @@ export default function PublishButton({ id }: { id: undefined | string }) {
     }
     if (published?.message) {
       toast.success(published.message);
+      revalidatePath("/dashboard/pending");
       router.refresh();
     } else if (published?.error) {
       toast.error(published.error);
