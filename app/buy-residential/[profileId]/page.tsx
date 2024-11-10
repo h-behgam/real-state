@@ -9,7 +9,6 @@ import connectDB from "@/app/utils/conectDB";
 
 // async function getProfileData(id:number) {
 // }
-
 export default async function ProfileDetailPage({ params: { profileId } }: { params: { profileId: string } }) {
   //conect db
   await connectDB();
@@ -24,3 +23,9 @@ export default async function ProfileDetailPage({ params: { profileId } }: { par
     </div>
   );
 }
+export const generateMetadata = async ({ params: { profileId } }: { params: { profileId: string } }) => {
+  await connectDB();
+  const profile: IProfile | null = await Profile.findById({ _id: profileId });
+
+  return { title: profile?.title, description: profile?.description };
+};
