@@ -5,8 +5,8 @@ import "./globals.css";
 import MainLayout from "./components/layout";
 
 export const metadata: Metadata = {
-  title: "real state",
-  description: "real state app",
+  title: "سامانه ثبت آگهی املاک",
+  description: "سایت آگهی املاک",
 };
 
 export default function RootLayout({
