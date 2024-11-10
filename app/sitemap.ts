@@ -1,6 +1,8 @@
 import type { MetadataRoute } from "next";
 import Profile from "./models/profile";
 
+export const dynamic = "force-dynamic"; // can be removed
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRoutes = ["/", "/buy-residential", "/signup", "/signin"];
 
