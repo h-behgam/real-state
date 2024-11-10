@@ -1,7 +1,14 @@
+import type { Metadata } from "next";
+
 import { ICard } from "@/app/components/dashboard/my-profiles/card";
 
 import BuyResidentialMain from "../components/UI/buy-residential/main/buy-residential-main";
 import BuyResidentialSidebar from "../components/UI/buy-residential/sidebar/buy-residential-sidebar";
+
+export const metadata: Metadata = {
+  title: "آگهی ها",
+  description: "لیست آگهی های ثبت شده",
+};
 
 // type Params = { slug: string };
 type SearchParams = { [key: string]: string | string[] | undefined };
