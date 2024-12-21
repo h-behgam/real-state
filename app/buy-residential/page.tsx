@@ -28,7 +28,7 @@ export default async function buyResidentialPage({
   const data: ICard[] = await res.json();
 
   return (
-    <div className="flex gap-x-5 p-4">
+    <div className="flex gap-x-5 p-4 flex-col gap-y-5 md:flex-row md:gap-y-0">
       <BuyResidentialSidebar />
       <BuyResidentialMain data={data} />
     </div>
