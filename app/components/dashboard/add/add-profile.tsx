@@ -63,7 +63,7 @@ export default function AddProfile({ profile }: { profile?: IProfile }) {
       <div className="bg-cyan-50 p-3 rounded-md mb-5">
         <h3 className="text-blue-500 font-normal">{profile ? "ویرایش" : "ثبت"} آگهی</h3>
       </div>
-      <form action={formHandler} className=" w-1/2">
+      <form action={formHandler} className=" md:w-1/2">
         <div className="mb-4">
           <CustomInput
             type="text"
