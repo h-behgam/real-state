@@ -9,7 +9,7 @@ interface DetailsPageProps {
 }
 export default function ProfileIdMain({ data: { title, location, description, amenities, rules } }: DetailsPageProps) {
   return (
-    <div className="w-10/12">
+    <div className="max-w-10/12">
       <div className="mb-1">
         <h1 className="text-blue-700 font-normal text-lg">{title}</h1>
       </div>
