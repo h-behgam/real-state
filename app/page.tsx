@@ -11,7 +11,7 @@ export default function Home() {
         <Image alt="hero" src={"/images/hero.jpg"} className="" fill />
       </div>
       <HomeServices />
-      <div className="flex justify-center py-10 gap-x-7 flex-wrap">
+      <div className="flex justify-center py-10 gap-x-7 flex-wrap gap-4">
         <HomeCategories />
       </div>
       <HomeCities />
