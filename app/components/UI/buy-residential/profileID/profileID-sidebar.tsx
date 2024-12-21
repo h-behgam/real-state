@@ -19,7 +19,7 @@ export default function ProfileIdSidebar({
 }: DetailsPageProps) {
   return (
     <div className="w-2/12">
-      <div className="w-60 p-3 shadow-[0_0px_14px_2px_rgba(96,125,250,0.3)] rounded-md mb-6">
+      <div className="min-w-52 p-3 shadow-[0_0px_14px_2px_rgba(96,125,250,0.3)] rounded-md mb-6">
         <SiHomebridge className="text-blue-800 text-6xl mx-auto mb-4" />
         <p className="text-center font-normal text-xl mb-4">املاک {realState}</p>
         <span className="flex items-center gap-x-2 justify-center">
@@ -27,10 +27,10 @@ export default function ProfileIdSidebar({
           <p>شماره تماس : {e2p(phone)}</p>
         </span>
       </div>
-      <div className="w-60 p-3 shadow-[0_0px_14px_2px_rgba(96,125,250,0.3)] rounded-md mb-6">
+      <div className="min-w-52 p-3 shadow-[0_0px_14px_2px_rgba(96,125,250,0.3)] rounded-md mb-6">
         <ShareButton />
       </div>
-      <div className="w-60 p-3 shadow-[0_0px_14px_2px_rgba(96,125,250,0.3)] rounded-md mb-6 flex flex-col justify-center items-center">
+      <div className="min-w-52 p-3 shadow-[0_0px_14px_2px_rgba(96,125,250,0.3)] rounded-md mb-6 flex flex-col justify-center items-center">
         <p className="flex items-center gap-x-1 text-blue-800 mb-4">
           {Object(icons)[category]}
           {Object(categories)[category]}
