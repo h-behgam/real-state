@@ -16,7 +16,7 @@ export default async function DashboardSidebar({
   role: string;
 }) {
   return (
-    <div className="flex gap-x-6 py-5 px-1">
+    <div className="flex gap-x-6 py-5 px-1 flex-col gap-y-6 md:flex-row md:gap-y-0">
       <div className="shadow-lg shadow-gray-300 p-2 rounded-lg w-52 font-normal max-h-fit">
         <CgProfile className="w-10 h-10 mx-auto mt-3 text-blue-500 text-center" />
         <p className="mb-8 text-center">{role === "ADMIN" ? "Admin" : null}</p>
@@ -25,7 +25,7 @@ export default async function DashboardSidebar({
           <Link href="/dashboard">حساب کاربری</Link>
           <Link href="/dashboard/my-profiles">آگهی های من</Link>
           <Link href="/dashboard/add">ثبت آگهی</Link>
-          {role === 'ADMIN' ? <Link href="/dashboard/pending">در انتظار تایید</Link> : null}
+          {role === "ADMIN" ? <Link href="/dashboard/pending">در انتظار تایید</Link> : null}
         </div>
         <LogoutButton>
           <FiLogOut />
